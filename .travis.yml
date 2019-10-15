@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true oisinf/docker_kubernetes npm run test 
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-west-1'
+  app: 'docker'
+  env: 'test-docker-container'
+  bucket_name: 'elasticbeanstalk-eu-west-1-035104414426'
+  bucket_path: 'docker'
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_ACCESS_KEY'
