@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t oisinf/docker_kubernetes -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true oisinf/docker_kubernetes npm run test 
